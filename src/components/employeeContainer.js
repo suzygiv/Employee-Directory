@@ -1,43 +1,43 @@
 import React, { Component } from "react";
-import Container from "./Container";
-import Row from "./Row";
-import Col from "./Col";
-import Card from "./Card";
-import SearchForm from "./SearchForm";
-import EmployeeDetail from "./EmployeeDetail";
+import Container from "./container";
+import Col from "./col";
+import Card from "./card";
+import Wrapper from "./wrapper";
+import SearchForm from "./searchForm";
+
 import API from "../utils/API";
 
 class EmployeeContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.searchEmployees = this.searchEmployees.bind(this)
-  }
   state = {
-    result: {},
+    result: [],
     search: ""
   };
 
-  // When this component mounts, search for an employee
+  // When this component mounts, search for specific employee
   componentDidMount() {
-    this.getEmployees();
+    API.getUsers()
+      .then((res) => {
+        this.setState({
+          employees: res.data.results.map((e, i) => ({
+            firstName: e.name.first,
+            lastName: e.name.last,
+            picture: e.picture.large,
+            email: e.email,
+            phone: e.phone,
+            city: e.location.city,
+            key: i,
+          })),
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
-  //this is where we need API.EmployeeDetail().then...the rest of line 24 and onward?
-  getEmployees = () => {
-    API.search()
-      .then(res => { console.log(res); return this.setState({ result: res.data.results }) })
+
+  searchEmployee = query => {
+    API.getUsers(query)
+      .then(res => this.setState({ result: res.data.results }))
       .catch(err => console.log(err));
   };
-
-  //add the function to search employees-- will probably be a filter, to filter through the state
-  searchEmployees = (searchTerm) => {
-    this.state.result.filter((item) => {
-      console.log(item)
-      //this is where you'll have the logic for comparing, JS comparison function
-    })
-    //this returns an array of the items that match the query
-
-  }
 
   handleInputChange = event => {
     const value = event.target.value;
@@ -47,48 +47,59 @@ class EmployeeContainer extends Component {
     });
   };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // When the form is submitted, search the Employee API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchEmployees(this.state.search);
+    this.searchEmployee(this.state.search);
   };
 
   render() {
     return (
-      <Container>
-        <Row>
-          <Col size="md-8">
-            <Card
-              heading={this.state.result.Title || "Search for an Employee here."}
-            >
-              {this.state.result.Title ? (
-                <EmployeeDetail
-                  src={this.state.result.picture.thumbnail}
-                  firstName={this.state.result.name.first}
-                  firstName={this.state.result.name.last}
-                  phone={this.state.result.phone}
-                  email={this.state.result.email}
-                  birthday={this.state.result.dob.date}
-                />
-                //shorthanded if/else statement
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
-            </Card>
-          </Col>
-          <Col size="md-4">
-            <Card heading="Search">
+      <Wrapper>
+        <div className="container">
+          <div className="row">
+            <Col>
+              <h2>Employee Directory</h2>
               <SearchForm
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
               />
-            </Card>
+            </Col>
+          </div>
+        </div>
+
+        <div className="row">
+          <Col>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>City</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...this.state.result].map((item) => (
+                  <Card
+                    picture={item.picture}
+                    firstName={item.name.first}
+                    lastName={item.name.last}
+                    email={item.email}
+                    phone={item.phone}
+                    city={item.location.city}
+                    key={item.key}
+                  />
+                ))}
+              </tbody>
+            </table>
           </Col>
-        </Row>
-      </Container>
-    );
+        </div>
+      </Wrapper>
+    )
   }
 }
-
 export default EmployeeContainer;

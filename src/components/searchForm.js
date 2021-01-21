@@ -1,3 +1,5 @@
+export default SearchForm;
+
 import React from "react";
 
 function SearchForm(props) {
@@ -11,7 +13,7 @@ function SearchForm(props) {
           name="search"
           type="text"
           className="form-control"
-          placeholder="Search For a Movie"
+          placeholder="Search For an Employee"
           id="search"
         />
         <br />

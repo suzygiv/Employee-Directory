@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/badge/License-mit-blue.svg "License Badge")
 
 ## Heroku 
-To view the Progressive Budget application, click here:
+To view the Employee Directory application, click here:
 
 ## Description
 

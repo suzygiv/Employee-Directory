@@ -5,7 +5,7 @@ import Card from "./card";
 import Wrapper from "./wrapper";
 import SearchForm from "./searchForm";
 
-import API from "../utils/API";
+import API from "../utils/API.js";
 
 class EmployeeContainer extends Component {
   state = {

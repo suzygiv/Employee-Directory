@@ -1,5 +1,3 @@
-export default SearchForm;
-
 import React from "react";
 
 function SearchForm(props) {

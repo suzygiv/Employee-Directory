@@ -56,7 +56,7 @@ class EmployeeContainer extends Component {
   render() {
     return (
       <Wrapper>
-        <div className="container">
+        <Container>
           <div className="row">
             <Col>
               <h2>Employee Directory</h2>
@@ -67,7 +67,6 @@ class EmployeeContainer extends Component {
               />
             </Col>
           </div>
-        </div>
 
         <div className="row">
           <Col>
@@ -98,6 +97,7 @@ class EmployeeContainer extends Component {
             </table>
           </Col>
         </div>
+        </Container>
       </Wrapper>
     )
   }

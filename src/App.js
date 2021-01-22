@@ -1,5 +1,5 @@
 import React from "react";
-import EmployeeContainer from "./components/employeeContainer.js";
+import EmployeeContainer from "./components/employeeContainer";
 
 function App() {
   return <EmployeeContainer />;

@@ -40,5 +40,6 @@
   },
   "devDependencies": {
     "eslint": "^7.14.0"
-  }
+  },
+  "homepage": "https://suzygiv.github.io/my-app"
 }

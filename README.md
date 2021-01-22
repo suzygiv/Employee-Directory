@@ -37,10 +37,6 @@ Once 'App listening on PORT: 3000' displays in your terminal, open your browser 
 
 ![Employee-Directory-Main]()
 
-### 
-
-![]()
-
 
 ## License
 ![License](https://img.shields.io/badge/License-mit-blue.svg "License Badge")

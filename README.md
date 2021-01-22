@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/License-mit-blue.svg "License Badge")
 
-## Heroku 
+## Application
 To view the Employee Directory application, click here:
 
 ## Description
@@ -10,7 +10,7 @@ To view the Employee Directory application, click here:
 An Employee Directory application created with React that allows the user to view their entire employee directory at once so that they have quick access to their information.
 
 ## Table of Contents
-- [Herkou](#Heroku)
+- [Application](#Application)
 - [Description](#Description)
 - [Installation](#Installation)
 - [Usage](#Usage)

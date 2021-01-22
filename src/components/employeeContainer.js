@@ -10,7 +10,12 @@ import API from "../utils/API.js";
 class EmployeeContainer extends Component {
   state = {
     result: [],
-    search: ""
+    filteredUser: [],
+    search: "",
+    filter: "",
+    filterBy: "lastName",
+    currentSort: "default",
+    sortField: ""
   };
 
   // When this component mounts, search for specific employee
@@ -51,7 +56,20 @@ class EmployeeContainer extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchEmployee(this.state.search);
+    this.filterEmployees();
   };
+
+  filterEmployees = (value) => { console.log("Search result: ", this.state.search)
+  const newArray = this.state.filteredUser.filter(item => {
+    // merge data together, then see if user input is anywhere inside
+    let values = Object.values(item)
+      .join("")
+      .toLowerCase();
+    return values.indexOf(this.state.search.toLowerCase()) !== -1;
+  });
+  console.log(newArray);
+  this.setState({ filteredUser: newArray})
+}
 
   render() {
     return (

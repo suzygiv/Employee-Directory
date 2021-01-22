@@ -5,40 +5,29 @@ import Card from "./card";
 import Wrapper from "./wrapper";
 import SearchForm from "./searchForm";
 
-import API from "../utils/API.js";
+import API from "../utils/API";
 
 class EmployeeContainer extends Component {
   state = {
     result: [],
-    filteredUser: [],
-    search: "",
-    filter: "",
-    filterBy: "lastName",
-    currentSort: "default",
-    sortField: ""
+    search: ""
   };
 
   // When this component mounts, search for specific employee
   componentDidMount() {
-    API.getUsers()
-      .then((res) => {
-        this.setState({
-          employees: res.data.results.map((e, i) => ({
-            firstName: e.name.first,
-            lastName: e.name.last,
-            picture: e.picture.large,
-            email: e.email,
-            phone: e.phone,
-            city: e.location.city,
-            key: i,
-          })),
-        });
-      })
-      .catch((err) => console.log(err));
+    this.firstEmployee()
   }
 
+  firstEmployee = () => {
+    API.getUsers()
+    .then(res =>
+      this.setState({result: res.data.results})
+      )
+      .catch(err => console.log(err));
+  }; 
 
-  searchEmployee = query => {
+  searchEmployee = (query) => {
+    console.log(query)
     API.getUsers(query)
       .then(res => this.setState({ result: res.data.results }))
       .catch(err => console.log(err));
@@ -55,29 +44,18 @@ class EmployeeContainer extends Component {
   // When the form is submitted, search the Employee API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchEmployee(this.state.search);
-    this.filterEmployees();
+    const filteredResults = this.state.result.filter(person => person.name.last.includes(this.state.search))
+    console.log(this.state.search);
+    this.setState({result: filteredResults});
   };
-
-  filterEmployees = (value) => { console.log("Search result: ", this.state.search)
-  const newArray = this.state.filteredUser.filter(item => {
-    // merge data together, then see if user input is anywhere inside
-    let values = Object.values(item)
-      .join("")
-      .toLowerCase();
-    return values.indexOf(this.state.search.toLowerCase()) !== -1;
-  });
-  console.log(newArray);
-  this.setState({ filteredUser: newArray})
-}
 
   render() {
     return (
       <Wrapper>
         <Container>
-          <div className="row">
+        <div className="row">
             <Col>
-              <h2>Employee Directory</h2>
+              <h1>Employee Directory</h1>
               <SearchForm
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}
@@ -86,35 +64,33 @@ class EmployeeContainer extends Component {
             </Col>
           </div>
 
-        <div className="row">
-          <Col>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>City</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[...this.state.result].map((item) => (
-                  <Card
-                    picture={item.picture}
-                    firstName={item.name.first}
-                    lastName={item.name.last}
-                    email={item.email}
-                    phone={item.phone}
-                    city={item.location.city}
-                    key={item.key}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </Col>
-        </div>
+          <div className="row">
+            <Col>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...this.state.result].map((item) => (
+                    <Card
+                      picture={item.picture.large}
+                      firstName={item.name.first}
+                      lastName={item.name.last}
+                      email={item.email}
+                      phone={item.phone}
+                      key={item.key}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </Col>
+          </div>
         </Container>
       </Wrapper>
     )

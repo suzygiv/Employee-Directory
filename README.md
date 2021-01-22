@@ -35,7 +35,7 @@ Once 'App listening on PORT: 3000' displays in your terminal, open your browser 
 
 ### Employee Directory Main Page
 
-![Employee-Directory-Main]()
+![Employee-Directory-Main](https://github.com/suzygiv/Employee-Directory/blob/main/public/Assets/Employee-Directory-Main.PNG)
 
 
 ## License

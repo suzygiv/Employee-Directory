@@ -4,6 +4,7 @@
 
 ## Application
 To view the Employee Directory application, click here:
+https://suzygiv.github.io/Employee-Directory/
 
 ## Description
 

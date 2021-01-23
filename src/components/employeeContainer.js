@@ -58,10 +58,9 @@ class EmployeeContainer extends Component {
 
   resetSearch = event => {
     event.preventDefault(); 
-    const reset = this.loadApi(); 
+    const reset = this.getUsers(); 
     return reset;
   }
-
 
   render() {
     return (

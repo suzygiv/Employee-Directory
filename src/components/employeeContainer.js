@@ -56,12 +56,6 @@ class EmployeeContainer extends Component {
     this.setState({result: filteredResults});
   };
 
-  resetSearch = event => {
-    event.preventDefault(); 
-    const reset = this.getUsers(); 
-    return reset;
-  }
-
   render() {
     return (
       <Wrapper>

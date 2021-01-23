@@ -19,10 +19,6 @@ function SearchForm(props) {
           Search Last Name
         </button>
       </div>
-      <div className="btn-toolbar">
-      <button onClick={props.handleNameSort} className="btn btn-primary mr-1">Name</button>
-      <button onClick={props.resetSearch} type="button" className="btn btn-primary mr-1">Reset Search</button>
-      </div>
     </form>
   );
 }

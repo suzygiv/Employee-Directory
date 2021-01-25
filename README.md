@@ -48,7 +48,7 @@ Once 'App listening on PORT: 3000' displays in your terminal, open your browser 
 [MIT License](http://opensource.org/licenses/mit-license.php)
 
 ## Contributors
-[Suzanne Givnish](https://github.com/suzygiv) and my Instructor, Anthony Briglia.
+[Suzanne Givnish](https://github.com/suzygiv) and Instructor, Anthony Briglia.
 
 ## Questions?
 ✉️ Contact me with any questions: [Email](suzannegivnish@gmail.com), [Github](https://github.com/suzygiv)
